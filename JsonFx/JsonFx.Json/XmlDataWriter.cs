@@ -28,6 +28,7 @@
 \*---------------------------------------------------------------------------------*/
 #endregion License
 
+#if !UNITY3D
 using System;
 using System.IO;
 using System.Text;
@@ -75,6 +76,7 @@ namespace JsonFx.Xml
 			if (namespaces == null)
 			{
 				namespaces = new XmlSerializerNamespaces();
+				namespaces.Add(String.Empty, String.Empty);// tricks the serializer into not emitting default xmlns attributes
 			}
 			this.Namespaces = namespaces;
 		}
@@ -170,3 +172,4 @@ namespace JsonFx.Xml
 		#endregion Methods
 	}
 }
+#endif
