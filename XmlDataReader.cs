@@ -130,6 +130,11 @@ namespace JsonFx.Xml
 		}
 
 		#endregion Methods
+
+		protected XmlSerializerNamespaces NotUsedMethod()
+		{
+			return this.Namespaces;
+		}
 	}
 }
 #endif
