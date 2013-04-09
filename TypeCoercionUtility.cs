@@ -143,7 +143,7 @@ namespace JsonFx.Json
 			try
 			{
 				// always try-catch Invoke() to expose real exception
-				result = System.Activator.CreateInstance(objectType);
+				result = ctor.Invoke(null);
 			}
 			catch (TargetInvocationException ex)
 			{
