@@ -366,6 +366,17 @@ namespace JsonFx.Json
 				if (targetType == typeof(DateTime))
 				{
 					DateTime date;
+
+					// If this is a crazy server date string, clean up the server junk.
+					if (((string)value).StartsWith("/Date(") && ((string)value).EndsWith(")/"))
+					{
+						date = new DateTime (1970, 1, 1, 0, 0, 0, 0);
+						value = ((string)value).Replace ("/Date(", "").Replace (")/", "").Replace("+0000","");
+						date = date.AddMilliseconds (long.Parse ((string)value));
+						return date;
+					}
+
+					// Try a regular DateTime parse
 					if (DateTime.TryParse(
 						(string)value,
 						DateTimeFormatInfo.InvariantInfo,
