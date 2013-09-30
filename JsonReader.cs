@@ -706,6 +706,7 @@ namespace JsonFx.Json
 
 							// unicode ordinal
 							int utf16;
+							
 							if (this.index+4 < this.SourceLength &&
 								Int32.TryParse(
 									this.Source.Substring(this.index+1, 4),
@@ -713,7 +714,10 @@ namespace JsonFx.Json
 									NumberFormatInfo.InvariantInfo,
 									out utf16))
 							{
-								builder.Append(Char.ConvertFromUtf32(utf16));
+								UnityEngine.Debug.Log(utf16);
+								//builder.Append(Char.ConvertFromUtf32(utf16));
+								builder.Append(JsonWriter.ConvertFromUtf32(utf16));
+								
 								this.index += 4;
 							}
 							else
