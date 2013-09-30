@@ -699,7 +699,10 @@ namespace JsonFx.Json
 
 			this.Writer.Write(JsonReader.OperatorStringDelim);
 
-			int[] combineCharIndex = StringInfo.ParseCombiningCharacters(value);
+			int[] combineCharIndex = new int[0];
+
+			if(value.Length > 0)
+				combineCharIndex = StringInfo.ParseCombiningCharacters(value);
 
 			int start = 0,
 			length = combineCharIndex.Length;
