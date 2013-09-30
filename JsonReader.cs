@@ -714,8 +714,6 @@ namespace JsonFx.Json
 									NumberFormatInfo.InvariantInfo,
 									out utf16))
 							{
-								UnityEngine.Debug.Log(utf16);
-								//builder.Append(Char.ConvertFromUtf32(utf16));
 								builder.Append(JsonWriter.ConvertFromUtf32(utf16));
 								
 								this.index += 4;
