@@ -786,72 +786,18 @@ namespace JsonFx.Json
 
 							if(chars.Length > 1)
 							{
-								//realLength -= (chars.Length -1);
 								skippedChars += 1;
 							}
-							
-							if( i+1 < combineCharIndex.Length)
-							{
-							//	start = combineCharIndex[index+1];
-							}
-
-							/*
-							if( utf32 <= 0xFFFF)
-							{
-								this.Writer.Write("\\u");
-								this.Writer.Write(utf32.ToString("X4"));
-							}
-							else
-							{
-								utf32 -= 0x10000;
-
-								this.Writer.Write("\\u");
-								int c = (utf32 / 0x400) + 0xD800;
-								this.Writer.Write(c.ToString("X4"));
-
-								this.Writer.Write("\\u");
-								c = (utf32 % 0x400) + 0xDC00;
-								this.Writer.Write(c.ToString("X4"));
-
-							}
-							*/
-
-							/*try
-							{
-								UnityEngine.Debug.Log(value + " " + i.ToString() + " " + ((int)ch).ToString());
-
-								{
-									int txt = Char.ConvertToUtf32(value[i],value[i+1]);
-									UnityEngine.Debug.Log(txt);
-									this.Writer.Write(txt.ToString("X"));
-									i++;
-									start++;
-								}
-							}
-							catch(ArgumentException e)
-							{
-								this.Writer.Write(Char.ConvertToUtf32(value, i).ToString("X4"));
-								throw;
-							}
-							*/
 
 							continue;
 						}
 					}
 				}
 			}
-
-			//length = realLength;
-			//length += skippedChars;
 			length = value.Length;
 
 			if (length > start)
 			{
-			 	//length = realLength;
-
-				UnityEngine.Debug.Log(value + " " + start.ToString() + " " + length.ToString() + " " + value.Length.ToString());
-				UnityEngine.Debug.Log(value.Substring(start, length-start));
-
 				this.Writer.Write(value.Substring(start, length-start));
 			}
 
