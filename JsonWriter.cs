@@ -773,7 +773,6 @@ namespace JsonFx.Json
 						default:
 						{
 							int utf32 = Char.ConvertToUtf32(value, i);
-							UnityEngine.Debug.Log(utf32);
 
 							string chars = JsonWriter.ConvertFromUtf32(utf32);
 
