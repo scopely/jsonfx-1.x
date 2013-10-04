@@ -608,7 +608,7 @@ namespace JsonFx.Json
 			return target.ToArray(elementType);
 		}
 
-		private static bool IsNullable(Type type)
+		internal static bool IsNullable(Type type)
 		{
 			return type.IsGenericType && (typeof(Nullable<>) == type.GetGenericTypeDefinition());
 		}
