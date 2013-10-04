@@ -166,7 +166,7 @@ namespace JsonFx.Json
 			return result;
 		}
 
-		private Dictionary<string, MemberInfo> CreateMemberMap(Type objectType)
+		internal Dictionary<string, MemberInfo> CreateMemberMap(Type objectType)
 		{
 			if (this.MemberMapCache.ContainsKey(objectType))
 			{
