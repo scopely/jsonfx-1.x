@@ -537,7 +537,7 @@ namespace JsonFx.Json
 
 					bool success = this.WriteDictionary((IEnumerable)value);
 					if (!success){
-						throw new JsonSerializationException(Serialization.GetValueDump(value));
+						//throw new JsonSerializationException(Serialization.GetValueDump(value));
 					}
 				}
 				finally
@@ -953,7 +953,7 @@ namespace JsonFx.Json
 		{
 			bool success = this.WriteDictionary((IEnumerable)value);
 			if (!success){
-				throw new JsonSerializationException(Serialization.GetValueDump(value));
+				//throw new JsonSerializationException(Serialization.GetValueDump(value));
 			}
 		}
 
