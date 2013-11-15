@@ -36,6 +36,7 @@ using System.Globalization;
 using System.IO;
 using System.Reflection;
 using System.Text;
+using Scopely.GDK;
 
 namespace JsonFx.Json
 {
@@ -534,7 +535,10 @@ namespace JsonFx.Json
 						this.WriteLine();
 					}
 
-					this.WriteDictionary((IEnumerable)value);
+					bool success = this.WriteDictionary((IEnumerable)value);
+					if (!success){
+						throw new JsonSerializationException(Serialization.GetValueDump(value));
+					}
 				}
 				finally
 				{
@@ -947,15 +951,19 @@ namespace JsonFx.Json
 
 		protected virtual void WriteObject(IDictionary value)
 		{
-			this.WriteDictionary((IEnumerable)value);
+			bool success = this.WriteDictionary((IEnumerable)value);
+			if (!success){
+				throw new JsonSerializationException(Serialization.GetValueDump(value));
+			}
 		}
 
-		protected virtual void WriteDictionary(IEnumerable value)
+		protected virtual bool WriteDictionary(IEnumerable value)
 		{
 			IDictionaryEnumerator enumerator = value.GetEnumerator() as IDictionaryEnumerator;
 			if (enumerator == null)
 			{
-				throw new JsonSerializationException(String.Format(JsonWriter.ErrorIDictionaryEnumerator, value.GetType()));
+				return false;
+//				throw new JsonSerializationException(String.Format(JsonWriter.ErrorIDictionaryEnumerator, value.GetType()));
 			}
 
 			bool appendDelim = false;
@@ -994,6 +1002,7 @@ namespace JsonFx.Json
 				this.WriteLine();
 			}
 			this.Writer.Write(JsonReader.OperatorObjectEnd);
+			return true;
 		}
 
 		private void WriteObjectProperty(string key, object value)
