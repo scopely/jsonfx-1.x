@@ -913,8 +913,15 @@ namespace JsonFx.Json
 			}
 			try
 			{
-				foreach (object item in value)
+				var enumerator = TypeCoercionUtility.GetEnumerator(value);
+
+				if (enumerator == null) {
+					throw new JsonTypeCoercionException(string.Format("Requested to get an IEnumerator of a value that doesn't implement the IEnumerable interface.\nValue: {0}\nValue's type: {1}",value,value.GetType().FullName));
+				}
+
+				while (enumerator.MoveNext())
 				{
+					object item = enumerator.Current;
 					if (appendDelim)
 					{
 						this.WriteArrayItemDelim();
@@ -926,6 +933,11 @@ namespace JsonFx.Json
 
 					this.WriteLine();
 					this.WriteArrayItem(item);
+				}
+
+				IDisposable disposable = enumerator as IDisposable;
+				if (disposable != null) {
+					disposable.Dispose ();
 				}
 			}
 			finally
