@@ -962,6 +962,7 @@ namespace JsonFx.Json
 			this.WriteDictionary((IEnumerable)value);
 		}
 
+		private static Dictionary<Type,MethodInfo> getEnumeratorMethods = new Dictionary<Type, MethodInfo>();
 		protected virtual void WriteDictionary(IEnumerable value)
 		{
 			object candidateEnumerator = value.GetEnumerator();
